@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/86185/Desktop/cc++/Stack&Queue/DoubleLinkedList.h
+iostream
+-
+cstdio
+-
+
+C:/Users/86185/Desktop/cc++/Stack&Queue/Queue.h
+DoubleLinkedList.h
+C:/Users/86185/Desktop/cc++/Stack&Queue/DoubleLinkedList.h
+
+C:/Users/86185/Desktop/cc++/Stack&Queue/Stack.h
+DoubleLinkedList.h
+C:/Users/86185/Desktop/cc++/Stack&Queue/DoubleLinkedList.h
+
+C:/Users/86185/Desktop/cc++/Stack&Queue/main.cpp
+iostream
+-
+Stack.h
+C:/Users/86185/Desktop/cc++/Stack&Queue/Stack.h
+Queue.h
+C:/Users/86185/Desktop/cc++/Stack&Queue/Queue.h
+

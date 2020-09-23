@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/86185/Desktop/cc++/convex_hull/DoubleLinkList.h
+iostream
+-
+cstdio
+-
+
+C:/Users/86185/Desktop/cc++/convex_hull/Stack.h
+DoubleLinkList.h
+C:/Users/86185/Desktop/cc++/convex_hull/DoubleLinkList.h
+
+C:/Users/86185/Desktop/cc++/convex_hull/main.cpp
+iostream
+-
+cstdlib
+-
+ctime
+-
+algorithm
+-
+Stack.h
+C:/Users/86185/Desktop/cc++/convex_hull/Stack.h
+fstream
+-
+

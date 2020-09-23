@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/86185/Desktop/cc++/Heap/Heap.h
+vector
+-
+exception
+-
+
+C:/Users/86185/Desktop/cc++/Heap/main.cpp
+iostream
+-
+Heap.h
+C:/Users/86185/Desktop/cc++/Heap/Heap.h
+

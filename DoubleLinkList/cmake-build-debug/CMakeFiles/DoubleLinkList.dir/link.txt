@@ -1,0 +1,3 @@
+"D:\Programming\Clion\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\DoubleLinkList.dir/objects.a
+D:\Programming\C++\Dev-Cpp\MinGW64\bin\ar.exe cr CMakeFiles\DoubleLinkList.dir/objects.a @CMakeFiles\DoubleLinkList.dir\objects1.rsp
+D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\DoubleLinkList.dir/objects.a -Wl,--no-whole-archive  -o DoubleLinkList.exe -Wl,--out-implib,libDoubleLinkList.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DoubleLinkList.dir\linklibs.rsp

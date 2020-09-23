@@ -1,0 +1,3 @@
+C:/Users/86185/Desktop/cc++/convex_hull/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/86185/Desktop/cc++/convex_hull/cmake-build-debug/CMakeFiles/convex_hull.dir
+C:/Users/86185/Desktop/cc++/convex_hull/cmake-build-debug/CMakeFiles/rebuild_cache.dir

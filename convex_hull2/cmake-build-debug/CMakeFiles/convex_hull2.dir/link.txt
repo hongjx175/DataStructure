@@ -1,0 +1,3 @@
+"D:\Programming\Clion\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\convex_hull2.dir/objects.a
+D:\Programming\C++\Dev-Cpp\MinGW64\bin\ar.exe cr CMakeFiles\convex_hull2.dir/objects.a @CMakeFiles\convex_hull2.dir\objects1.rsp
+D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\convex_hull2.dir/objects.a -Wl,--no-whole-archive  -o convex_hull2.exe -Wl,--out-implib,libconvex_hull2.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\convex_hull2.dir\linklibs.rsp

@@ -30,8 +30,8 @@ private:
 		}
 	}myCompare;*/
 public:
-	Algorithm();
-	~Algorithm(){}
+	Algorithm(){};
+	~Algorithm(){};
 
 	//非递归
 	static void quicksort(T *begin, T *end){

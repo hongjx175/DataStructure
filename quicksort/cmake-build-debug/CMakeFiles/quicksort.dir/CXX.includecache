@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/86185/Desktop/DataStructure/quicksort/Algorithm.h
+Stack.h
+C:/Users/86185/Desktop/DataStructure/quicksort/Stack.h
+
+C:/Users/86185/Desktop/DataStructure/quicksort/Stack.h
+iostream
+-
+cstdio
+-
+
+C:/Users/86185/Desktop/DataStructure/quicksort/main.cpp
+iostream
+-
+Algorithm.h
+C:/Users/86185/Desktop/DataStructure/quicksort/Algorithm.h
+

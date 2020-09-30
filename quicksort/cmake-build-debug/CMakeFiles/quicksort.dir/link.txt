@@ -1,3 +1,0 @@
-"D:\Programming\Clion\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\quicksort.dir/objects.a
-D:\Programming\C++\Dev-Cpp\MinGW64\bin\ar.exe cr CMakeFiles\quicksort.dir/objects.a @CMakeFiles\quicksort.dir\objects1.rsp
-D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\quicksort.dir/objects.a -Wl,--no-whole-archive  -o quicksort.exe -Wl,--out-implib,libquicksort.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\quicksort.dir\linklibs.rsp

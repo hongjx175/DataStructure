@@ -1,3 +1,0 @@
-C:/Users/86185/Desktop/cc++/quicksort/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/86185/Desktop/cc++/quicksort/cmake-build-debug/CMakeFiles/quicksort.dir
-C:/Users/86185/Desktop/cc++/quicksort/cmake-build-debug/CMakeFiles/rebuild_cache.dir

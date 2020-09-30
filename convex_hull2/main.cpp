@@ -3,6 +3,7 @@
 #include <ctime>
 #include <algorithm>
 #include "Stack.h"
+#include "Algorithm.h"
 #include<fstream>
 #define random() (rand()%2001-1000)
 
@@ -48,8 +49,8 @@ int main() {
 	}
 
 	root = &nodes[0];
-
-	sort(nodes+1, nodes+num, point_comp);
+	Algorithm<Node>* al = new Algorithm<Node>;
+	al->quicksort(nodes+1, nodes+num-1, point_comp);
 	f<<num<<endl;
 	for(int i=0;i<num;i++){
 		f<<nodes[i].x<<endl<<nodes[i].y<<endl;

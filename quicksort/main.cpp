@@ -4,6 +4,7 @@ using std::cout;
 using std::endl;
 bool comp(const int &a,const int &b){
 	return a>b;
+
 }
 
 int main() {

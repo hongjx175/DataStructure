@@ -6,7 +6,23 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/86185/Desktop/DataStructure/convex_hull2/Stack.h
+iostream
+-
+cstdio
+-
+
 C:/Users/86185/Desktop/DataStructure/convex_hull2/main.cpp
 iostream
+-
+cstdlib
+-
+ctime
+-
+algorithm
+-
+Stack.h
+C:/Users/86185/Desktop/DataStructure/convex_hull2/Stack.h
+fstream
 -
 

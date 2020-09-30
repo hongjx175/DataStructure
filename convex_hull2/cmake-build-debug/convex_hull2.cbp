@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/86185/Desktop/DataStructure/convex_hull2/Algorithm.h">
+			<Option target="convex_hull2"/>
+		</Unit>
+		<Unit filename="C:/Users/86185/Desktop/DataStructure/convex_hull2/Stack.h">
+			<Option target="convex_hull2"/>
+		</Unit>
 		<Unit filename="C:/Users/86185/Desktop/DataStructure/convex_hull2/main.cpp">
 			<Option target="convex_hull2"/>
 		</Unit>

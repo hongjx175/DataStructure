@@ -21,6 +21,8 @@ num = int(file.readline())
 for i in range(0, num):
     convex_hull_x.append(int(file.readline()))
     convex_hull_y.append(int(file.readline()))
+'''for i in range(0, num):
+    plt.text(convex_hull_x[i], convex_hull_y[i],i)'''
 plt.plot(convex_hull_x, convex_hull_y)
 
 plt.show()

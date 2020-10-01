@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
-#include "Stack.h"
 #include "Algorithm.h"
 #include<fstream>
 #define random() (rand()%2001-1000)
@@ -32,35 +31,46 @@ int cross(const Node &a, const Node &b, const Node &c){
 }
 
 vector<Node> getConv(vector<Node> nodes){
-	//cout<<"1"<<endl;
 	vector<Node> conv;
-	/*if(nodes.size() < 3){
-		conv = nodes;
-		return conv;
-	}
-	if(nodes.size() == 3){
-		conv.push_back(nodes[0]);
-		//逆时针
-		if(cross(nodes[1],nodes[2],nodes[0]) < 0){
-			swap(&nodes[1], &nodes[2]);
-		}
-		conv.push_back(nodes[1]);
-		conv.push_back(nodes[2]);
-		return conv;
-	}*/
 	if(nodes.size() <= 7){
 		int size = nodes.size();
-		int root = 0;
-		for(int i=0;i<size;i++){
-			root = (nodes[i].x<nodes[root].x || (nodes[i].x==nodes[root].x&&nodes[i].y<nodes[root].y))?i:root;
+		int root = 0, cur;
+		for(int i=1;i<size;i++){
+			root = (nodes[i].y<nodes[root].y || (nodes[i].y==nodes[root].y&&nodes[i].x<nodes[root].x))?i:root;
 		}
-		for(int i=0;i<size;i++){
+		conv.push_back(nodes[root]);
 
+		cur = root;
+		double last_angle = 0;
+		while(true){
+			double angle =  10;
+			int next = cur;
+			for(int j=0;j<nodes.size();j++){
+				if(j == cur) continue;
+				double cur_angle = atan2(nodes[j].y - nodes[cur].y, nodes[j].x - nodes[cur].x);
+				cur_angle -= last_angle;
+				if(cur_angle < 0) cur_angle += 3.1415926*2;
+				if(angle >= cur_angle){
+					angle = cur_angle;
+					next = j;
+				}
+			}
+			if(root == next) break;
+			last_angle = atan2(nodes[next].y - nodes[cur].y, nodes[next].x - nodes[cur].x);
+			cur = next;
+			conv.push_back(nodes[cur]);
 		}
+
+		return conv;
 	}
 
-	vector<Node> left(nodes.begin()+0,nodes.begin()+nodes.size()/2);
-	vector<Node> right(nodes.begin()+nodes.size()/2, nodes.end());
+	vector<Node> left(nodes.begin()+0,nodes.begin()+(nodes.size()/2));
+	vector<Node> right(nodes.begin()+(nodes.size()/2), nodes.end());
+	/*vector<Node> left,right;
+	for(int i=0;i<nodes.size()/2;i++)
+		left.push_back(nodes[i]);
+	for(int i=nodes.size()/2;i<nodes.size();i++)
+		right.push_back(nodes[i]);*/
 	vector<Node> left_conv = getConv(left);
 	vector<Node> right_conv = getConv(right);
 
@@ -85,7 +95,7 @@ vector<Node> getConv(vector<Node> nodes){
 			a = (a - 1+sizeA)%sizeA;
 		}
 		while(cross(right_conv[b], right_conv[(b+1)%sizeB], left_conv[a]) <= 0){
-			b = (b + 1 )%sizeB;
+			b = (b + 1)%sizeB;
 		}
 	}
 	lowera = a;
@@ -111,11 +121,13 @@ vector<Node> getConv(vector<Node> nodes){
 		conv.push_back(left_conv[a]);
 		a = (a + 1)%sizeA;
 	}
+	conv.push_back(left_conv[lowera]);
 	b = lowerb;
 	while(b != upperb){
 		conv.push_back(right_conv[b]);
 		b = (b + 1)%sizeB;
 	}
+	conv.push_back(right_conv[upperb]);
 	return conv;
 }
 
@@ -139,7 +151,6 @@ int main() {
 	f<<num<<endl;
 	for(int i=0;i<num;i++){
 		f<<nodes[i].x<<endl<<nodes[i].y<<endl;
-		//cout<<nodes[i].x<<"  "<<nodes[i].y<<endl;
 	}
 	vector<Node> conv = getConv(nodes);
 	int size = conv.size();

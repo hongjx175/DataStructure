@@ -76,27 +76,27 @@ include CMakeFiles/BinaryTree.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/BinaryTree.dir/flags.make
 
-CMakeFiles/BinaryTree.dir/main.cpp.obj: CMakeFiles/BinaryTree.dir/flags.make
-CMakeFiles/BinaryTree.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86185\Desktop\DataStructure\BinaryTree\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BinaryTree.dir/main.cpp.obj"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\BinaryTree.dir\main.cpp.obj -c C:\Users\86185\Desktop\DataStructure\BinaryTree\main.cpp
+CMakeFiles/BinaryTree.dir/binarytree.cpp.obj: CMakeFiles/BinaryTree.dir/flags.make
+CMakeFiles/BinaryTree.dir/binarytree.cpp.obj: ../binarytree.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86185\Desktop\DataStructure\BinaryTree\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/BinaryTree.dir/binarytree.cpp.obj"
+	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\BinaryTree.dir\binarytree.cpp.obj -c C:\Users\86185\Desktop\DataStructure\BinaryTree\binarytree.cpp
 
-CMakeFiles/BinaryTree.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BinaryTree.dir/main.cpp.i"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86185\Desktop\DataStructure\BinaryTree\main.cpp > CMakeFiles\BinaryTree.dir\main.cpp.i
+CMakeFiles/BinaryTree.dir/binarytree.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/BinaryTree.dir/binarytree.cpp.i"
+	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86185\Desktop\DataStructure\BinaryTree\binarytree.cpp > CMakeFiles\BinaryTree.dir\binarytree.cpp.i
 
-CMakeFiles/BinaryTree.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BinaryTree.dir/main.cpp.s"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86185\Desktop\DataStructure\BinaryTree\main.cpp -o CMakeFiles\BinaryTree.dir\main.cpp.s
+CMakeFiles/BinaryTree.dir/binarytree.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/BinaryTree.dir/binarytree.cpp.s"
+	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86185\Desktop\DataStructure\BinaryTree\binarytree.cpp -o CMakeFiles\BinaryTree.dir\binarytree.cpp.s
 
 # Object files for target BinaryTree
 BinaryTree_OBJECTS = \
-"CMakeFiles/BinaryTree.dir/main.cpp.obj"
+"CMakeFiles/BinaryTree.dir/binarytree.cpp.obj"
 
 # External object files for target BinaryTree
 BinaryTree_EXTERNAL_OBJECTS =
 
-BinaryTree.exe: CMakeFiles/BinaryTree.dir/main.cpp.obj
+BinaryTree.exe: CMakeFiles/BinaryTree.dir/binarytree.cpp.obj
 BinaryTree.exe: CMakeFiles/BinaryTree.dir/build.make
 BinaryTree.exe: CMakeFiles/BinaryTree.dir/linklibs.rsp
 BinaryTree.exe: CMakeFiles/BinaryTree.dir/objects1.rsp

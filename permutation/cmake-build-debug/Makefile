@@ -142,32 +142,32 @@ permutation/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/build
 .PHONY : permutation/fast
 
-main.obj: main.cpp.obj
+permutation.obj: permutation.cpp.obj
 
-.PHONY : main.obj
+.PHONY : permutation.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+permutation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/permutation.cpp.obj
+.PHONY : permutation.cpp.obj
 
-main.i: main.cpp.i
+permutation.i: permutation.cpp.i
 
-.PHONY : main.i
+.PHONY : permutation.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/main.cpp.i
-.PHONY : main.cpp.i
+permutation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/permutation.cpp.i
+.PHONY : permutation.cpp.i
 
-main.s: main.cpp.s
+permutation.s: permutation.cpp.s
 
-.PHONY : main.s
+.PHONY : permutation.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/main.cpp.s
-.PHONY : main.cpp.s
+permutation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\permutation.dir\build.make CMakeFiles/permutation.dir/permutation.cpp.s
+.PHONY : permutation.cpp.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... permutation
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... permutation.obj
+	@echo ... permutation.i
+	@echo ... permutation.s
 .PHONY : help
 
 

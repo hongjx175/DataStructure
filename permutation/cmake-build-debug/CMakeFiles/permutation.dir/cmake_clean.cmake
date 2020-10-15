@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/permutation.dir/main.cpp.obj"
+  "CMakeFiles/permutation.dir/permutation.cpp.obj"
   "libpermutation.dll.a"
   "permutation.exe"
   "permutation.exe.manifest"

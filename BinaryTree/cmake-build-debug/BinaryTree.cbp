@@ -91,10 +91,7 @@
 		<Unit filename="C:/Users/86185/Desktop/DataStructure/BinaryTree/Stack.h">
 			<Option target="BinaryTree"/>
 		</Unit>
-		<Unit filename="C:/Users/86185/Desktop/DataStructure/BinaryTree/binarytree.cpp">
-			<Option target="BinaryTree"/>
-		</Unit>
-		<Unit filename="C:/Users/86185/Desktop/DataStructure/BinaryTree/binarytree.h">
+		<Unit filename="C:/Users/86185/Desktop/DataStructure/BinaryTree/main.cpp">
 			<Option target="BinaryTree"/>
 		</Unit>
 		<Unit filename="C:/Users/86185/Desktop/DataStructure/BinaryTree/CMakeLists.txt">

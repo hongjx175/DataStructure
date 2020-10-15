@@ -82,7 +82,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/86185/Desktop/DataStructure/permutation/main.cpp">
+		<Unit filename="C:/Users/86185/Desktop/DataStructure/permutation/permutation.cpp">
 			<Option target="permutation"/>
 		</Unit>
 		<Unit filename="C:/Users/86185/Desktop/DataStructure/permutation/CMakeLists.txt">

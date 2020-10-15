@@ -22,11 +22,13 @@ iostream
 cstdio
 -
 
-C:/Users/86185/Desktop/DataStructure/BinaryTree/binarytree.cpp
-iostream
--
+C:/Users/86185/Desktop/DataStructure/BinaryTree/main.cpp
 BinaryTree.h
 C:/Users/86185/Desktop/DataStructure/BinaryTree/BinaryTree.h
+Stack.h
+C:/Users/86185/Desktop/DataStructure/BinaryTree/Stack.h
+iostream
+-
 vector
 -
 

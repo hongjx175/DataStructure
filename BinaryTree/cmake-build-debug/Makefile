@@ -142,32 +142,32 @@ BinaryTree/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/build
 .PHONY : BinaryTree/fast
 
-binarytree.obj: binarytree.cpp.obj
+main.obj: main.cpp.obj
 
-.PHONY : binarytree.obj
+.PHONY : main.obj
 
 # target to build an object file
-binarytree.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/binarytree.cpp.obj
-.PHONY : binarytree.cpp.obj
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/main.cpp.obj
+.PHONY : main.cpp.obj
 
-binarytree.i: binarytree.cpp.i
+main.i: main.cpp.i
 
-.PHONY : binarytree.i
+.PHONY : main.i
 
 # target to preprocess a source file
-binarytree.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/binarytree.cpp.i
-.PHONY : binarytree.cpp.i
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-binarytree.s: binarytree.cpp.s
+main.s: main.cpp.s
 
-.PHONY : binarytree.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-binarytree.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/binarytree.cpp.s
-.PHONY : binarytree.cpp.s
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\BinaryTree.dir\build.make CMakeFiles/BinaryTree.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -178,9 +178,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... BinaryTree
-	@echo ... binarytree.obj
-	@echo ... binarytree.i
-	@echo ... binarytree.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 .PHONY : help
 
 

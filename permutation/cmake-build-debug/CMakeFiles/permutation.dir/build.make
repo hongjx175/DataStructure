@@ -76,27 +76,27 @@ include CMakeFiles/permutation.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/permutation.dir/flags.make
 
-CMakeFiles/permutation.dir/main.cpp.obj: CMakeFiles/permutation.dir/flags.make
-CMakeFiles/permutation.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86185\Desktop\DataStructure\permutation\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/permutation.dir/main.cpp.obj"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\permutation.dir\main.cpp.obj -c C:\Users\86185\Desktop\DataStructure\permutation\main.cpp
+CMakeFiles/permutation.dir/permutation.cpp.obj: CMakeFiles/permutation.dir/flags.make
+CMakeFiles/permutation.dir/permutation.cpp.obj: ../permutation.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86185\Desktop\DataStructure\permutation\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/permutation.dir/permutation.cpp.obj"
+	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\permutation.dir\permutation.cpp.obj -c C:\Users\86185\Desktop\DataStructure\permutation\permutation.cpp
 
-CMakeFiles/permutation.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/permutation.dir/main.cpp.i"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86185\Desktop\DataStructure\permutation\main.cpp > CMakeFiles\permutation.dir\main.cpp.i
+CMakeFiles/permutation.dir/permutation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/permutation.dir/permutation.cpp.i"
+	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86185\Desktop\DataStructure\permutation\permutation.cpp > CMakeFiles\permutation.dir\permutation.cpp.i
 
-CMakeFiles/permutation.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/permutation.dir/main.cpp.s"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86185\Desktop\DataStructure\permutation\main.cpp -o CMakeFiles\permutation.dir\main.cpp.s
+CMakeFiles/permutation.dir/permutation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/permutation.dir/permutation.cpp.s"
+	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86185\Desktop\DataStructure\permutation\permutation.cpp -o CMakeFiles\permutation.dir\permutation.cpp.s
 
 # Object files for target permutation
 permutation_OBJECTS = \
-"CMakeFiles/permutation.dir/main.cpp.obj"
+"CMakeFiles/permutation.dir/permutation.cpp.obj"
 
 # External object files for target permutation
 permutation_EXTERNAL_OBJECTS =
 
-permutation.exe: CMakeFiles/permutation.dir/main.cpp.obj
+permutation.exe: CMakeFiles/permutation.dir/permutation.cpp.obj
 permutation.exe: CMakeFiles/permutation.dir/build.make
 permutation.exe: CMakeFiles/permutation.dir/linklibs.rsp
 permutation.exe: CMakeFiles/permutation.dir/objects1.rsp

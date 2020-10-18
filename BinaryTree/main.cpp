@@ -14,8 +14,13 @@ int main() {
 	binaryTree->insertNode(2,2,0,3,-1);
 	binaryTree->insertNode(3,3,2,-1,-1);
 	binaryTree->insertNode(4,4,1,-1,-1);
-	binaryTree->layerTraversal();
+	binaryTree->layerTraversal();//层次遍历
 	cout<<endl;
-	binaryTree->preorderTraversal();
+	binaryTree->preorderTraversal();//前序遍历
+	cout<<endl;
+	binaryTree->postorderTraversal();//后序遍历
+	cout<<endl;
+	binaryTree->inorderTraversal();//中序遍历
+
 	return 0;
 }

@@ -14,10 +14,12 @@ template<typename T>
 class BinaryTree {
 private:
 	int root;
+
 	struct Node{
-		int id, father, lChild, rChild;
+		int id;
+		Node *father, *lChild, *rChild;
 		T data;
-		Node(T d, int i, int f, int l, int r){
+		Node(T d, int i, Node *f, Node *l, Node *r){
 			data = d;
 			id = i;
 			father = f;
@@ -34,27 +36,29 @@ public:
 	BinaryTree(){
 		root = -1;
 	}
+	~BinaryTree(){
+		delete tree;
+		tree = nullptr;
+	}
 	void insertNode(T data, int id, int father, int lChild, int rChild);
 	bool empty();
 	void layerTraversal();
 	void preorderTraversal();
 	void postorderTraversal();
 	void inorderTraversal();
-	void restorePre(int preorder[], int inorder[]);
-	void restorePost(int postorder[], int inorder[]);
+	BinaryTree<T>* restorePre(int preorder[], int inorder[], int len);
+	BinaryTree<T>* restorePost(int postorder[], int inorder[], int len);
 };
 
 template<typename T>
 void BinaryTree<T>::insertNode(T data, int id, int father, int lChild, int rChild) {
-	Node *node = new Node(data, id, father, lChild, rChild);
-	if(father == -1) root = id;
-	int maxn = max(max(lChild, rChild),father);
+	int maxn = max(max(lChild, rChild),max(father, id));
 	if(maxn >= tree.size()){
 		tree.resize(maxn+1);
 	}
-	if(tree.size()>id)
-		tree[id] = node;
-	else tree.push_back(node);
+	Node *node = new Node(data, id, tree[father], tree[lChild], tree[rChild]);
+	if(father == -1) root = id;
+	tree[id] = node;
 }
 template<typename T>
 bool BinaryTree<T>::empty() {
@@ -81,7 +85,7 @@ void BinaryTree<T>::preorderTraversal() {
 	if(tree.empty()) return;
 	Stack<int>* stack = new Stack<int>();
 	Node *cur = tree[root];
-
+/* //方法一
 	while(true){
 		cout<<*cur<<"  ";
 		if(cur->rChild != -1){
@@ -95,23 +99,70 @@ void BinaryTree<T>::preorderTraversal() {
 			stack->pop();
 		}
 	}
+ */
+	//方法二
+	stack->push(root);
+	while(!stack->empty()){
+		cur = tree[stack->top()];
+		stack->pop();
+		cout<<*cur<<"  ";
+		(cur->rChild != -1)?stack->push(cur->rChild):void();
+		(cur->lChild != -1)?stack->push(cur->lChild):void();
+
+	}
 }
 //后序遍历
 template<typename T>
 void BinaryTree<T>::postorderTraversal() {
 	if(tree.empty()) return;
 	Stack<int>* stack = new Stack<int>();
+	Node *cur = tree[root];
+	stack->push(root);
+	while(!stack->empty()){
+		if(cur->lChild == -1 && cur->rChild ==-1){
+			cout<<*cur<<"  ";
+			stack->pop();
+			//叶结点出栈后，若栈顶为出栈的叶结点的父亲，继续出战
+			while(!stack->empty() && (cur->father==stack->top())){
+				cur = tree[stack->top()];
+				cout<<*cur<<"  ";
+				stack->pop();
+			}
+		}else{
+			//先右后左
+			(cur->rChild != -1)?stack->push(cur->rChild):void();
+			(cur->lChild != -1)?stack->push(cur->lChild):void();
+		}
+
+		if(!stack->empty()) cur = tree[stack->top()];
+	}
 	
 }
 //中序遍历
 template<typename T>
 void BinaryTree<T>::inorderTraversal() {
+	if(tree.empty()) {
+		cout<<"empty";
+		return;
+	}
+	Stack<int>* stack = new Stack<int>();
+	Node *cur = tree[root];
+	while (!stack->empty() || cur != nullptr){
+		while(cur != nullptr){
+			stack->push(cur->id);
+			cur = (cur->lChild != -1)?tree[cur->lChild]: nullptr;
+		}
+		cur = tree[stack->top()];
+		cout<<*cur<<"  ";
+		stack->pop();
+		cur = (cur->rChild != -1)?tree[cur->rChild]: nullptr;
+	}
+}
+template<typename T>
+BinaryTree<T>* BinaryTree<T>::restorePost(int *postorder, int *inorder, int len) {
 
 }
 template<typename T>
-void BinaryTree<T>::restorePost(int *postorder, int *inorder) {
-}
-template<typename T>
-void BinaryTree<T>::restorePre(int *preorder, int *inorder) {
+BinaryTree<T>* BinaryTree<T>::restorePre(int *preorder, int *inorder, int len) {
 }
 #endif//BINARYTREE_BINARYTREE_H

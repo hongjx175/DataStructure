@@ -10,16 +10,15 @@ using std::cout;
 using std::vector;
 using std::ostream;
 using std::max;
+using std::endl;
 template<typename T>
 class BinaryTree {
 private:
 	int root;
-
 	struct Node{
-		int id;
-		Node *father, *lChild, *rChild;
+		int id, father, lChild, rChild;
 		T data;
-		Node(T d, int i, Node *f, Node *l, Node *r){
+		Node(T d, int i, int f, int l, int r){
 			data = d;
 			id = i;
 			father = f;
@@ -37,17 +36,15 @@ public:
 		root = -1;
 	}
 	~BinaryTree(){
-		delete tree;
-		tree = nullptr;
 	}
 	void insertNode(T data, int id, int father, int lChild, int rChild);
 	bool empty();
 	void layerTraversal();
 	void preorderTraversal();
 	void postorderTraversal();
-	void inorderTraversal();
-	BinaryTree<T>* restorePre(int preorder[], int inorder[], int len);
-	BinaryTree<T>* restorePost(int postorder[], int inorder[], int len);
+	void midorderTraversal();
+	int restorePre(int preorder[], int midorder[], int len, int father=-1);
+	int restorePost(int postorder[], int midorder[], int len, int father=-1);
 };
 
 template<typename T>
@@ -56,7 +53,7 @@ void BinaryTree<T>::insertNode(T data, int id, int father, int lChild, int rChil
 	if(maxn >= tree.size()){
 		tree.resize(maxn+1);
 	}
-	Node *node = new Node(data, id, tree[father], tree[lChild], tree[rChild]);
+	Node *node = new Node(data, id, father, lChild, rChild);
 	if(father == -1) root = id;
 	tree[id] = node;
 }
@@ -123,7 +120,7 @@ void BinaryTree<T>::postorderTraversal() {
 			cout<<*cur<<"  ";
 			stack->pop();
 			//叶结点出栈后，若栈顶为出栈的叶结点的父亲，继续出战
-			while(!stack->empty() && (cur->father==stack->top())){
+			while(!stack->empty() && ((cur->id==(tree[stack->top()])->lChild) || (cur->id==(tree[stack->top()])->rChild))){
 				cur = tree[stack->top()];
 				cout<<*cur<<"  ";
 				stack->pop();
@@ -140,7 +137,7 @@ void BinaryTree<T>::postorderTraversal() {
 }
 //中序遍历
 template<typename T>
-void BinaryTree<T>::inorderTraversal() {
+void BinaryTree<T>::midorderTraversal() {
 	if(tree.empty()) {
 		cout<<"empty";
 		return;
@@ -159,10 +156,59 @@ void BinaryTree<T>::inorderTraversal() {
 	}
 }
 template<typename T>
-BinaryTree<T>* BinaryTree<T>::restorePost(int *postorder, int *inorder, int len) {
+int BinaryTree<T>::restorePost(int *postorder, int *midorder, int len, int father) {
+	if(postorder == NULL || midorder == NULL || len < 1) return NULL;
 
+	//后根遍历的最后一个值就是根节点
+	int rootKey = *(postorder+len-1);
+	//cout<<"rootKey: "<<rootKey<<endl;
+	int leftLen = 0;
+	int *rootMidorder = midorder;
+
+	//在中根遍历（中序遍历）中找到根节点
+	while(*rootMidorder != rootKey && rootMidorder<=midorder+len-1){
+		rootMidorder++;
+		leftLen++;
+	}
+	if(*rootMidorder != rootKey)
+		return NULL;
+
+	int lChild = -1, rChild = -1;
+	if(leftLen > 0){
+		lChild = restorePost(postorder, midorder, leftLen, rootKey);//左
+	}
+	if(len - leftLen - 1 > 0){
+		rChild = restorePost(postorder+leftLen,rootMidorder+1 ,len-leftLen-1, rootKey);//右
+	}
+	this->insertNode(rootKey, rootKey, father, lChild, rChild);
+	return rootKey;
 }
 template<typename T>
-BinaryTree<T>* BinaryTree<T>::restorePre(int *preorder, int *inorder, int len) {
+int BinaryTree<T>::restorePre(int *preorder, int *midorder, int len, int father) {
+	if(preorder == NULL || midorder == NULL || len < 1) return NULL;
+
+	//先根遍历的第一个值就是根节点
+	int rootKey = *(preorder+0);
+	//cout<<"rootKey: "<<rootKey<<endl;
+	int leftLen = 0;
+	int *rootMidorder = midorder;
+
+	//在中序遍历中找到根节点
+	while(*rootMidorder != rootKey && rootMidorder<=midorder+len-1){
+		rootMidorder++;
+		leftLen++;
+	}
+	if(*rootMidorder != rootKey)
+		return NULL;
+
+	int lChild = -1, rChild = -1;
+	if(leftLen > 0){
+		lChild = restorePre(preorder+1, midorder, leftLen, rootKey);//左
+	}
+	if(len - leftLen - 1 > 0){
+		rChild = restorePre(preorder+leftLen+1,rootMidorder+1 ,len-leftLen-1, rootKey);//右
+	}
+	this->insertNode(rootKey, rootKey, father, lChild, rChild);
+	return rootKey;
 }
 #endif//BINARYTREE_BINARYTREE_H

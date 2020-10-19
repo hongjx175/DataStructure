@@ -1,5 +1,4 @@
 #include "BinaryTree.h"
-#include "Stack.h"
 #include <iostream>
 #include <vector>
 using std::vector;

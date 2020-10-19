@@ -1,7 +1,3 @@
-//
-// Created by 86185 on 2020/10/14.
-//
-
 #ifndef BINARYTREE_BINARYTREE_H
 #define BINARYTREE_BINARYTREE_H
 #include "Queue.h"

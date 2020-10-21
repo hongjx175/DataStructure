@@ -8,6 +8,7 @@
 *.log
 *.log.*
 *.sig
-
+.idea
+.clang-format
 pkg/
 src/

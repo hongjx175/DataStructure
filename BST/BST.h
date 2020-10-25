@@ -4,7 +4,6 @@
 
 #ifndef BST_BST_H
 #define BST_BST_H
-#include "DoubleLinkedList.h"
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -32,12 +31,10 @@ private:
 		}
 	};
 	Node *root;
-	DoubleLinkList<Node *> *list;
 
 public:
 	BST() {
 		root = nullptr;
-		list = new DoubleLinkList<Node *>();
 	};
 	~BST() {
 		delete[] root;

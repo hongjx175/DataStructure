@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/86185/Desktop/DataStructure/BST/BST.h
+DoubleLinkedList.h
+C:/Users/86185/Desktop/DataStructure/BST/DoubleLinkedList.h
+iostream
+-
+
+C:/Users/86185/Desktop/DataStructure/BST/DoubleLinkedList.h
+iostream
+-
+cstdio
+-
+
+C:/Users/86185/Desktop/DataStructure/BST/main.cpp
+BST.h
+C:/Users/86185/Desktop/DataStructure/BST/BST.h
+ctime
+-
+iostream
+-
+

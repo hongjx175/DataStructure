@@ -25,5 +25,6 @@ int main() {
 	cout << "after del(a[10])" << endl;
 	bst->display();
 	cout << "The 7th max element: " << bst->getData(7) << endl;
+	delete bst;
 	return 0;
 }

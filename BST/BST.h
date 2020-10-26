@@ -37,7 +37,10 @@ public:
 		root = nullptr;
 	};
 	~BST() {
-		delete[] root;
+		while (root != nullptr) {
+			//cout << *root << endl;
+			del(root);
+		}
 	};
 	void ins(T data);
 	void del(T data);
@@ -116,13 +119,18 @@ void BST<T>::del(Node *node) {
 			node1 = node1->rightSon;
 		}
 	}
+	if (node1 == root) {
+		root = root->rightSon;
+		delete node1;
+		return;
+	}
 	if (node1 == node) {
 		//一定无左儿子
 		//删除node，两种情况，node为其父节点的左/右儿子
 		if ((node->rightSon)->leftSon == node) {
 			Node *father = node->rightSon;
 			father->leftSon = node->leftSon;
-			father->leftFlag = false;
+			father->leftFlag = node->leftFlag;
 			delete node;
 			node = nullptr;
 		} else {

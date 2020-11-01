@@ -1,6 +1,5 @@
 #ifndef AVLTREE_AVLTREE_H
 #define AVLTREE_AVLTREE_H
-#include "Stack.h"
 #include <iostream>
 using std::cout;
 using std::endl;

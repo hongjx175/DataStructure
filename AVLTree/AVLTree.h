@@ -27,25 +27,20 @@ private:
 		}
 	};
 	Node *root;
-	void leftRotate(Node *node);
-	void rightRotate(Node *node);
-	int max(int a, int b) {
-		return a > b ? a : b;
-	}
-	int getHeight(Node *node) {
-		return node == nullptr ? 0 : node->height;
-	}
+	//void leftRotate(Node *node);
+	//void rightRotate(Node *node);
+	void balance(Node *node, bool lrFlag);
+	int max(int a, int b) { return a > b ? a : b; }
+	int getHeight(Node *node) { return node == nullptr ? 0 : node->height; }
 	bool updateHeight(Node *node);
 	void update(Node *node);
 	void _display(Node *node);
 
 public:
-	AVLTree() {
-		root = nullptr;
-	}
-	~AVLTree() {
-	}
+	AVLTree() { root = nullptr; }
+	~AVLTree() {}
 	void ins(T data);
+	void del(T data);
 	void display();
 };
 template<typename T>
@@ -57,82 +52,30 @@ bool AVLTree<T>::updateHeight(Node *node) {
 	return false;
 }
 template<typename T>
-void AVLTree<T>::leftRotate(Node *node) {
-	Node *father = node->father, *son = node->rightSon;
+void AVLTree<T>::balance(Node *node, bool lrFlag) {
+	Node *father = node->father, *son = (lrFlag) ? node->leftSon : node->rightSon;//lrFlag为真右旋
 	if (father != nullptr) {
-		if (node->data < father->data) {//左儿子
+		if (node == father->leftSon)//左儿子
 			father->leftSon = son;
-			node->rightSon = son->leftSon;
-			son->leftSon = node;
-			(node->rightSon)->father = node;
-		} else {
-			/*father->rightSon = node->rightSon;
-			(node->rightSon)->father = father;
-			Node *tmp = (node->rightSon)->leftSon;
-			node->rightSon = tmp;
-			if (tmp) tmp->father = node;
-			(father->rightSon)->leftSon = node;
-			node->father = father->rightSon;*/
+		else//右儿子
 			father->rightSon = son;
-			node->rightSon = son->leftSon;
-			son->leftSon = node;
-			(node->rightSon)->father = node;
-		}
-		node->father = son;
-		son->father = father;
-
-		updateHeight(node);
-		updateHeight(son);
-		updateHeight(father);
-
 	} else {
-		root = node->rightSon;
-		node->rightSon = root->leftSon;
-		(root->leftSon)->father = node;
-		root->leftSon = node;
-		node->father = root;
-		updateHeight(node);
-		updateHeight(root);
+		root = son;
 	}
-}
-template<typename T>
-void AVLTree<T>::rightRotate(Node *node) {
-	Node *father = node->father;
-
-
-	bool lrFlag = false;
-	if (father != nullptr) {
-		if (node->data < father->data) {
-			father->leftSon = node->leftSon;
-			(node->leftSon)->father = father;
-			Node *tmp = (node->leftSon)->rightSon;
-			node->leftSon = tmp;
-			tmp->father = node;
-			(father->leftSon)->rightSon = node;
-			node->father = father->leftSon;
-		} else {
-			father->rightSon = node->leftSon;
-			(node->leftSon)->father = father;
-			Node *tmp = (node->leftSon)->rightSon;
-			node->leftSon = tmp;
-			tmp->father = node;
-			(father->rightSon)->rightSon = node;
-			node->father = father->rightSon;
-			lrFlag = true;
-		}
-		updateHeight(node);
-		(lrFlag) ? updateHeight(father->rightSon) : updateHeight(father->leftSon);
-		updateHeight(father);
-
+	if (node) (lrFlag) ? (node->leftSon = son->rightSon) : (node->rightSon = son->leftSon);
+	if (son) (lrFlag) ? (son->rightSon = node) : (son->leftSon = node);
+	if (lrFlag) {
+		if (node->leftSon) (node->leftSon)->father = node;
 	} else {
-		root = node->leftSon;
-		node->leftSon = root->rightSon;
-		if (root->rightSon) (root->rightSon)->father = node;
-		root->rightSon = node;
-		node->father = root;
-		updateHeight(node);
-		updateHeight(root);
+		if (node->rightSon) (node->rightSon)->father = node;
 	}
+
+	if (node) node->father = son;
+	if (son) son->father = father;
+
+	updateHeight(node);
+	updateHeight(son);
+	updateHeight(father);
 }
 template<typename T>
 void AVLTree<T>::update(Node *node) {
@@ -140,18 +83,18 @@ void AVLTree<T>::update(Node *node) {
 		if (getHeight(node->leftSon) - getHeight(node->rightSon) > 1) {
 			Node *son = node->leftSon;
 			if (getHeight(son->leftSon) >= getHeight(son->rightSon)) {
-				rightRotate(node);
+				balance(node, true);//rightRotate(node);
 			} else {
-				leftRotate(son);
-				rightRotate(node);
+				balance(son, false);//leftRotate(son);
+				balance(node, true);//rightRotate(node);
 			}
 		} else if (getHeight(node->rightSon) - getHeight(node->leftSon) > 1) {
 			Node *son = node->rightSon;
 			if (getHeight(son->leftSon) > getHeight(son->rightSon)) {
-				rightRotate(son);
-				leftRotate(node);
+				balance(son, true);  //rightRotate(son);
+				balance(node, false);//leftRotate(node);
 			} else {
-				leftRotate(node);
+				balance(node, false);//leftRotate(node);
 			}
 		}
 		bool flag = updateHeight(node);
@@ -190,6 +133,10 @@ void AVLTree<T>::ins(T data) {
 	}
 }
 template<typename T>
+void AVLTree<T>::del(T data) {
+	Node *node = root;
+}
+template<typename T>
 void AVLTree<T>::display() {
 	_display(root);
 	cout << endl;
@@ -201,4 +148,50 @@ void AVLTree<T>::_display(Node *node) {
 	cout << *node << "  ";
 	(node->rightSon != nullptr) ? _display(node->rightSon) : void();
 }
+
+/*
+template<typename T>
+void AVLTree<T>::leftRotate(Node *node) {
+	Node *father = node->father, *son = node->rightSon;
+	if (father != nullptr) {
+		if (node == father->leftSon)//左儿子
+			father->leftSon = son;
+		else//右儿子
+			father->rightSon = son;
+	} else {
+		root = son;
+	}
+
+	if (node) node->rightSon = son->leftSon;
+	if (son) son->leftSon = node;
+	if (node->rightSon) (node->rightSon)->father = node;
+	if (node) node->father = son;
+	if (son) son->father = father;
+
+	updateHeight(node);
+	updateHeight(son);
+	updateHeight(father);
+}
+template<typename T>
+void AVLTree<T>::rightRotate(Node *node) {
+	Node *father = node->father, *son = node->leftSon;
+	if (father != nullptr) {
+		if (node == father->leftSon)
+			father->leftSon = son;
+		else
+			father->rightSon = son;
+	} else {
+		root = son;
+	}
+
+	if (node) node->leftSon = son->rightSon;
+	if (son) son->rightSon = node;
+	if (node->leftSon) (node->leftSon)->father = node;
+	if (node) node->father = son;
+	if (son) son->father = father;
+
+	updateHeight(node);
+	updateHeight(son);
+	updateHeight(father);
+}*/
 #endif//AVLTREE_AVLTREE_H

@@ -29,7 +29,7 @@ int main() {
 	for (int i = 0; i < 100; ++i) {
 		avlTree->ins(1);
 	}
-	cout << "The height of the tree containing 100 ones is: ***  " << avlTree->height() << "  ***" << endl;
+	cout << "\nThe height of the tree containing 100 ones is: ***  " << avlTree->height() << "  ***" << endl;
 	delete avlTree;
 	return 0;
 }

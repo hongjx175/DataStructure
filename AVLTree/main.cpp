@@ -8,10 +8,19 @@ int main() {
 	avlTree->ins(5);
 	avlTree->ins(4);
 	avlTree->ins(1);
+	avlTree->display();
+	avlTree->ins(3);
+	avlTree->ins(3);
+	avlTree->ins(3);
+	avlTree->display();
+	avlTree->ins(2);
 	avlTree->ins(3);
 	avlTree->ins(3);
 	avlTree->ins(3);
 	avlTree->ins(3);
 	avlTree->ins(3);
+	avlTree->ins(3);
+	avlTree->ins(3);
+	avlTree->display();
 	return 0;
 }

@@ -33,7 +33,10 @@ private:
 
 public:
 	AVLTree() { root = nullptr; }
-	~AVLTree() {}
+	~AVLTree() {
+		while (root)
+			del(root->data);
+	}
 	void ins(T data);
 	void del(T data);
 	void display();
@@ -133,7 +136,10 @@ void AVLTree<T>::del(T data) {
 	Node *node = root;
 	while (node != nullptr) {
 		if (data == node->data) {
-			if (node == root && node->leftSon == nullptr) root = node->rightSon;
+			if (node == root && node->leftSon == nullptr) {
+				root = node->rightSon;
+				break;
+			}
 			Node *node1 = node;
 			while (node1->leftSon) {
 				node1 = node1->leftSon;

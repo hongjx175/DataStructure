@@ -1,7 +1,3 @@
-//
-// Created by 86185 on 2020/10/26.
-//
-
 #ifndef AVLTREE_AVLTREE_H
 #define AVLTREE_AVLTREE_H
 #include "Stack.h"
@@ -42,6 +38,7 @@ public:
 	void ins(T data);
 	void del(T data);
 	void display();
+	int height() { return getHeight(root); };
 };
 template<typename T>
 bool AVLTree<T>::updateHeight(Node *node) {
@@ -135,6 +132,25 @@ void AVLTree<T>::ins(T data) {
 template<typename T>
 void AVLTree<T>::del(T data) {
 	Node *node = root;
+	while (node != nullptr) {
+		if (data == node->data) {
+			if (node == root && node->leftSon == nullptr) root = node->rightSon;
+			Node *node1 = node;
+			while (node1->leftSon) {
+				node1 = node1->leftSon;
+				while (node1->rightSon) node1 = node1->rightSon;
+				node->data = node1->data;
+				node = node1;
+			}
+			(node->father)->leftSon == node ? (node->father)->leftSon = nullptr : (node->father)->rightSon = nullptr;
+			delete node;
+			update(node->father);
+			break;
+		}
+		node = (data < node->data) ? node->leftSon : node->rightSon;
+		if (!node) cout << "Invalid Data!" << endl;
+	}
+	return;
 }
 template<typename T>
 void AVLTree<T>::display() {

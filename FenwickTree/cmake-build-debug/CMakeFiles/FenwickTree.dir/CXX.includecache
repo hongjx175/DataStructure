@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/86185/Desktop/DataStructure/FenwickTree/FenwickTree.h
+iostream
+-
+vector
+-
+
+C:/Users/86185/Desktop/DataStructure/FenwickTree/main.cpp
+FenwickTree.h
+C:/Users/86185/Desktop/DataStructure/FenwickTree/FenwickTree.h
+ctime
+-
+iostream
+-
+

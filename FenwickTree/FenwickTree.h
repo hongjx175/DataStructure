@@ -11,7 +11,10 @@ private:
 
 public:
 	FenwickTree(int *a, int n);
-	~FenwickTree();
+	~FenwickTree() {
+		tree->clear();
+		delete tree;
+	};
 	int query(int l, int r);
 	void update(int x, int data);
 };

@@ -4,7 +4,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
-#define random() (rand() % 11)
+#define random() (rand() % 7)
 int main() {
 	unsigned seed = time(0);
 	srand(seed);
@@ -18,5 +18,6 @@ int main() {
 	cout << "\nquery(0, 5): " << fenwickTree->query(0, 5) << endl;
 	fenwickTree->update(3, 1);
 	cout << "after a[3] adding 1, query(0, 5): " << fenwickTree->query(0, 5) << endl;
+	delete fenwickTree;
 	return 0;
 }

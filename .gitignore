@@ -12,3 +12,4 @@
 .clang-format
 pkg/
 src/
+*/cmake-build-debug

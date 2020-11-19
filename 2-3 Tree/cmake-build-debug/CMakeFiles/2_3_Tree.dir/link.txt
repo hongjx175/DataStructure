@@ -1,3 +1,0 @@
-"D:\Programming\Clion\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\2_3_Tree.dir/objects.a
-D:\Programming\MinGW-w64\mingw64\bin\ar.exe cr CMakeFiles\2_3_Tree.dir/objects.a @CMakeFiles\2_3_Tree.dir\objects1.rsp
-D:\Programming\MinGW-w64\mingw64\bin\g++.exe -g   -Wl,--whole-archive CMakeFiles\2_3_Tree.dir/objects.a -Wl,--no-whole-archive  -o 2_3_Tree.exe -Wl,--out-implib,lib2_3_Tree.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\2_3_Tree.dir\linklibs.rsp

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/86185/Desktop/DataStructure/2-3 Tree
+# Install script for directory: D:/Github-repository/DataStructure/2-3 Tree
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/86185/Desktop/DataStructure/2-3 Tree/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Github-repository/DataStructure/2-3 Tree/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

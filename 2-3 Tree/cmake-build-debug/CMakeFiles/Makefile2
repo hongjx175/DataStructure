@@ -54,19 +54,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe"
+CMAKE_COMMAND = "D:\Programming\Clion\CLion 2020.1\bin\cmake\win\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "C:\Program Files\JetBrains\CLion 2020.2.4\bin\cmake\win\bin\cmake.exe" -E rm -f
+RM = "D:\Programming\Clion\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Github-repository\DataStructure\2-3 Tree"
+CMAKE_SOURCE_DIR = "C:\Users\86185\Desktop\DataStructure\2-3 Tree"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Github-repository\DataStructure\2-3 Tree\cmake-build-debug"
+CMAKE_BINARY_DIR = "C:\Users\86185\Desktop\DataStructure\2-3 Tree\cmake-build-debug"
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -93,14 +93,14 @@ clean: CMakeFiles/2_3_Tree.dir/clean
 CMakeFiles/2_3_Tree.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\2_3_Tree.dir\build.make CMakeFiles/2_3_Tree.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\2_3_Tree.dir\build.make CMakeFiles/2_3_Tree.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="D:\Github-repository\DataStructure\2-3 Tree\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target 2_3_Tree"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="C:\Users\86185\Desktop\DataStructure\2-3 Tree\cmake-build-debug\CMakeFiles" --progress-num=1,2 "Built target 2_3_Tree"
 .PHONY : CMakeFiles/2_3_Tree.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/2_3_Tree.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Github-repository\DataStructure\2-3 Tree\cmake-build-debug\CMakeFiles" 2
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\86185\Desktop\DataStructure\2-3 Tree\cmake-build-debug\CMakeFiles" 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/2_3_Tree.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start "D:\Github-repository\DataStructure\2-3 Tree\cmake-build-debug\CMakeFiles" 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "C:\Users\86185\Desktop\DataStructure\2-3 Tree\cmake-build-debug\CMakeFiles" 0
 .PHONY : CMakeFiles/2_3_Tree.dir/rule
 
 # Convenience name for target.

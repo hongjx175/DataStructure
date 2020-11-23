@@ -3,4 +3,4 @@ project(KMP)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(KMP main.cpp)
+add_executable(KMP KMP.cpp)

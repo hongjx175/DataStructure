@@ -27,14 +27,35 @@ private:
 			son = new vector<Node *>();
 		}
 
-		void isLeaf() { return son->empty(); }
+		bool isLeaf() { return son->empty(); }
 
-		void needSplit() { return data->size() > 2; }
+		bool needSplit() { return data->size() > 2; }
 
 		void insertData(T idata) {
 			auto it = data->begin();
 			for (; it != data->end() && (*it) < idata; ++it);
 			data->insert(it, idata);
+		}
+
+		void deleteData(int id) {
+			data->erase(data->begin() + id);
+		}
+
+		void insertSon(Node *ison) {
+			son->push_back(ison);
+			ison->father = this;
+		}
+
+		void deleteSon(int id) {
+			son->erase(son->begin() + id);
+		}
+
+		T dataAt(int id) {
+			return (*data)[id];
+		}
+
+		Node *sonAt(int id) {
+			return (*son)[id];
 		}
 
 		int contains(T idata);
@@ -53,10 +74,25 @@ private:
 	int _rank(T data, Node *start); //返回rank
 	void _display(Node *node);
 
-	Node *findeInsertNode(T data, Node *node);
+	Node *findInsertNode(T data, Node *node) {
+		if (node == nullptr)
+			return nullptr;
+		if (node->isLeaf()) {
+			for (auto it = (node->data)->begin(); it != (node->data)->end(); ++it) {
+				if (*it == data) return nullptr;
+			}
+			return node;
+		} else {
+			for (auto it = node->data->begin(); it != node->data->end(); ++it) {
+				
+			}
+		}
+	}
 
 public:
-	Tree2_3() { root == nullptr; }
+	Tree2_3() { root = nullptr; }
+
+	~Tree2_3() {}
 
 	void display() { _display(root); }             //遍历
 	void ins(T data);                              //插入
@@ -123,25 +159,13 @@ void Tree2_3<T>::_display(Node *node) {
 			cout << *it << "  ";
 		}
 	} else {
-		_display(*(node->son)[0]);
-		cout << *(node->data)[0] << "  ";
-		_display(*(node->son)[1]);
+		_display((*(node->son))[0]);
+		cout << (*(node->data))[0] << "  ";
+		_display((*(node->son))[1]);
 		if (node->size() > 1) {
-			cout << *(node->data)[1] << "  ";
-			_display(*(node->son)[2]);
+			cout << (*(node->data))[1] << "  ";
+			_display((*(node->son))[2]);
 		}
-	}
-}
-
-template<typename T>
-typename Tree2_3<T>::Node *Tree2_3<T>::findeInsertNode(T data, Node *node) {
-	if (node == nullptr)
-		return nullptr;
-	if (node->isLeaf()) {
-		for (auto it = (node->data)->begin(); it != (node->data)->end(); ++it) {
-			if (*it == data) return nullptr;
-		}
-		return node;
 	}
 }
 
@@ -152,7 +176,35 @@ template<typename T>
 void Tree2_3<T>::split(Node *node) {
 	if (node == nullptr) return;
 	Node *father = node->father;
-	
+	int midData = node->dataAt(1);
+	Node *node1 = new Node();
+
+	node1->insertData(node->dataAt(2));
+	node->deleteData(2);
+	node->deleteData(1);
+	if (!node->isLeaf()) {
+		node1->insertSon(node->sonAt(2));
+		node1->insertSon(node->sonAt(3));
+		node->deleteSon(3);
+		node->deleteSon(2);
+	}
+
+	if (father == nullptr) {
+		//根节点
+		root = new Node();
+		root->father = nullptr;
+		root->insertSon(node);
+		root->insertSon(node1);
+		root->insertData(midData);
+	} else {
+		father->insertData(midData);
+		auto it = father->son->begin();
+		while (*it != node) ++it;
+		++it;
+		father->son->insert(it, node1);
+		if (father->needSplit())
+			split(father);
+	}
 }
 
 template<typename T>

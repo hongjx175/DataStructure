@@ -77,14 +77,16 @@ private:
 	Node *findInsertNode(T data, Node *node) {
 		if (node == nullptr)
 			return nullptr;
-		if (node->isLeaf()) {
-			for (auto it = (node->data)->begin(); it != (node->data)->end(); ++it) {
-				if (*it == data) return nullptr;
-			}
-			return node;
-		} else {
-			for (auto it = node->data->begin(); it != node->data->end(); ++it) {
-				
+		for (auto it = (node->data)->begin(); it != (node->data)->end(); ++it) {
+			if (*it == data) return nullptr;
+		}
+		if (node->isLeaf()) return node;
+		else {
+			if (data < node->dataAt(0)) {
+				return findInsertNode(data, node->sonAt(0));
+			} else {
+				if (node->size() > 1 && data > node->dataAt(1)) return findInsertNode(data, node->sonAt(2));
+				else return findInsertNode(data, node->sonAt(1));
 			}
 		}
 	}
@@ -159,12 +161,12 @@ void Tree2_3<T>::_display(Node *node) {
 			cout << *it << "  ";
 		}
 	} else {
-		_display((*(node->son))[0]);
-		cout << (*(node->data))[0] << "  ";
-		_display((*(node->son))[1]);
+		_display(node->sonAt(0));
+		cout << node->dataAt(0) << "  ";
+		_display(node->sonAt(1));
 		if (node->size() > 1) {
-			cout << (*(node->data))[1] << "  ";
-			_display((*(node->son))[2]);
+			cout << node->dataAt(1) << "  ";
+			_display(node->sonAt(2));
 		}
 	}
 }

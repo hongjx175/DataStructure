@@ -62,6 +62,9 @@ void Graph::init(int source, map<int, double> *dis, map<int, bool> *unused) {
 }
 
 void Graph::Dijkstra(int source) {
+
+	//每次往优先队列里添加新的状态，保证时间复杂度为O(nlog(n+m))
+
 	priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>> *priorityQueue
 			= new priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>>();
 	map<int, double> *dis = new map<int, double>();

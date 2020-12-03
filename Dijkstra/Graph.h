@@ -13,11 +13,13 @@ using namespace std;
 
 class Graph {
 private:
-	map<int, set<pair<double, int>>> *graph;
-	map<int, double> *dis;
+	map<int, vector<pair<double, int>>> *graph;
+	set<int> *points;
 	map<int, int> *pre;
 
-	void init(int source);
+	const int INF = 2147483647;
+
+	void init(int source, map<int, double> *dis, map<int, bool> *unused);
 
 public:
 	Graph();
@@ -27,48 +29,82 @@ public:
 	void addEdge(int s, int t, double weight);
 
 	void Dijkstra(int s);
-	/*void show() {
-		for (auto it = (*graph)[1].begin(); it != (*graph)[1].end(); ++it) {
-			cout << it->first << "  " << it->second << endl;
-		}
-	}*/
+
+	void showPath(int point);
 };
 
 Graph::Graph() {
-	graph = new map<int, set<pair<double, int>>>();
-	dis = new map<int, double>();
+	graph = new map<int, vector<pair<double, int>>>();
+	points = new set<int>();
 	pre = new map<int, int>();
 }
 
 Graph::~Graph() {
 	graph->clear();
-	dis->clear();
 	pre->clear();
+	points->clear();
 	delete graph;
-	delete dis;
 	delete pre;
+	delete points;
 }
 
 void Graph::addEdge(int s, int t, double weight) {
-	(*graph)[s].insert(make_pair(weight, t));
+	(*graph)[s].push_back(make_pair(weight, t));
+	points->insert(s);
+	points->insert(t);
 }
 
-void Graph::init(int source) {
-	dis->clear();
+void Graph::init(int source, map<int, double> *dis, map<int, bool> *unused) {
+	(*pre)[source] = -1;
+	for (auto item = points->begin(); item != points->end(); ++item)
+		(*dis)[*item] = INF, (*unused)[*item] = true;
+	(*dis)[source] = 0;
 }
 
-void Graph::Dijkstra(int s) {
-	init(s);
-	priority_queue<pair<double, int>> *priorityQueue = new priority_queue<pair<double, int>>();
-	priorityQueue->push(make_pair(1, 2));
-	priorityQueue->push(make_pair(2, 1));
+void Graph::Dijkstra(int source) {
+	priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>> *priorityQueue
+			= new priority_queue<pair<double, int>, vector<pair<double, int>>, greater<pair<double, int>>>();
+	map<int, double> *dis = new map<int, double>();
+	map<int, bool> *unused = new map<int, bool>;
+	init(source, dis, unused);
+	for (auto item = dis->begin(); item != dis->end(); ++item)
+		priorityQueue->push(make_pair(item->second, item->first));
+
 	while (!priorityQueue->empty()) {
-		auto p = priorityQueue->top();
+		pair<double, int> point = priorityQueue->top();
 		priorityQueue->pop();
-		cout << p.first << endl;
+		while ((*unused)[point.second] == false && !priorityQueue->empty()) {
+			point = priorityQueue->top();
+			priorityQueue->pop();
+		}
+		if (priorityQueue->empty()) break;
+		(*unused)[point.second] = false;//用于更新其他的点
+		vector<pair<double, int>> linkEdges = (*graph)[point.second];
+		for (auto edge = linkEdges.begin(); edge != linkEdges.end(); ++edge) {
+			if ((*dis)[edge->second] > (*dis)[point.second] + edge->first) {
+				(*pre)[edge->second] = point.second;
+				(*dis)[edge->second] = (*dis)[point.second] + edge->first;
+				priorityQueue->push(make_pair((*dis)[edge->second], edge->second));
+				//(*unused)[edge->second] = true;
+			}
+		}
 	}
+	for (auto item = dis->begin(); item != dis->end(); ++item) {
+		cout << "distance from " << source << " to " << item->first << " : **" << item->second << "**";
+		cout << "    The path is :";
+		showPath(item->first);
+		cout << endl;
+	}
+	dis->clear();
+	unused->clear();
+	delete dis;
+	delete unused;
+}
 
-
+void Graph::showPath(int point) {
+	if (point == -1) return;
+	showPath((*pre)[point]);
+	cout << point << "  ";
 }
 
 #endif //DIJKSTRA_GRAPH_H

@@ -3,4 +3,4 @@ project(Dijkstra)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Dijkstra main.cpp Graph.h)
+add_executable(Dijkstra test.cpp Graph.h)

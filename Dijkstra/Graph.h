@@ -21,6 +21,8 @@ private:
 
 	void init(int source, map<int, double> *dis, map<int, bool> *unused);
 
+	void showPath(int point);
+
 public:
 	Graph();
 
@@ -29,8 +31,6 @@ public:
 	void addEdge(int s, int t, double weight);
 
 	void Dijkstra(int s);
-
-	void showPath(int point);
 };
 
 Graph::Graph() {

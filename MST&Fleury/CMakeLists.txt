@@ -3,4 +3,4 @@ project(MST_Fleury)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(MST_Fleury main.cpp)
+add_executable(MST_Fleury test.cpp)

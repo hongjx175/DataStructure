@@ -1,2 +1,2 @@
 # DataStructure
-assignments of curriculum DataStructure
+Assignments of curriculum DataStructures

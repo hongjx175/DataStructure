@@ -15,5 +15,6 @@ int main() {
 	}
 	AlgoOnGraph *algoOnGraph = new AlgoOnGraph();
 	algoOnGraph->Kruskal(graph);
+	algoOnGraph->Fleury(graph);
 	return 0;
 }

@@ -25,7 +25,6 @@ private:
 public:
 	Graph(int n, int m) {
 		numPoints = n;
-		E.resize(m);
 	}
 
 	~Graph() {}

@@ -26,6 +26,10 @@ private:
 
 	int bfs(Graph *graph, int s, int t, pair<int, int> *pre, int *flow);
 
+	int dfsForDinic(Graph *graph, int s, int t, int flow, int *deep);
+
+	bool bfsForDinic(Graph *graph, int s, int t, int *deep);
+
 	vector<bool> used;
 };
 
@@ -94,8 +98,51 @@ int AlgoOnGraph::maxflow_EdmondsKarp(Graph *graph, int source, int sink) {
 }
 
 int AlgoOnGraph::maxflow_Dinic(Graph *graph, int source, int sink) {
-	//todo: 忘光了，先留个坑（逃
+	int maxflow = 0, augmentation;
+	int deep[graph->numPoints];
+	while (bfsForDinic(graph, source, sink, deep)) {//存在增广路
+		while ((augmentation = dfsForDinic(graph, source, sink, INF, deep)) > 0) {
+			maxflow += augmentation;
+		}
+	}
+	return maxflow;
+}
+
+int AlgoOnGraph::dfsForDinic(Graph *graph, int s, int t, int flow, int *deep) {
+	if (s == t) return flow;
+	int curflow = 0;
+	for (int i = graph->head[s]; i; i = graph->nxt[i]) {
+		int y = graph->to[i];//边的终点
+		if (deep[y] == deep[s] + 1 && graph->capacity[i] > 0) {
+			curflow = dfsForDinic(graph, y, t, std::min(flow, graph->capacity[i]), deep);
+			if (curflow > 0) {
+				graph->capacity[i] -= curflow;
+				graph->capacity[i ^ 1] += curflow;
+				return curflow;
+			}
+		}
+
+	}
 	return 0;
+}
+
+bool AlgoOnGraph::bfsForDinic(Graph *graph, int s, int t, int *deep) {
+	for (int i = 0; i < graph->numPoints; i++) deep[i] = -1;
+	deep[s] = 0;
+	queue<int> que;
+	que.push(s);
+	while (!que.empty()) {
+		int x = que.front();
+		que.pop();
+		for (int i = graph->head[x]; i; i = graph->nxt[i]) {
+			int y = graph->to[i];
+			if (deep[y] == -1 && graph->capacity[i] > 0) {
+				deep[y] = deep[x] + 1;
+				que.push(y);
+			}
+		}
+	}
+	return (deep[t] != -1);//是否存在增广路
 }
 
 

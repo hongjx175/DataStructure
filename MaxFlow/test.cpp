@@ -18,9 +18,12 @@ int main() {
 	}
 
 	Graph *graph1 = new Graph(graph);
+	Graph *graph2 = new Graph(graph);
 	int maxflow1 = algoOnGraph->maxflow_FordFulkerson(graph, source, sink);
 	int maxflow2 = algoOnGraph->maxflow_EdmondsKarp(graph1, source, sink);
+	int maxflow3 = algoOnGraph->maxflow_Dinic(graph2, source, sink);
 	cout << "maxflow computated by FordFulkerson: " << maxflow1 << endl;
 	cout << "maxflow computated by EdmondsKarp: " << maxflow2 << endl;
+	cout << "maxflow computated by Dinic: " << maxflow3 << endl;
 	return 0;
 }

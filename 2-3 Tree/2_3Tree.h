@@ -51,11 +51,11 @@ private:
 		}
 
 		T dataAt(int id) {
-			return (*data)[id];
+			return data->at(id);
 		}
 
 		Node *sonAt(int id) {
-			return (*son)[id];
+			return son->at(id);
 		}
 
 		int contains(T idata);

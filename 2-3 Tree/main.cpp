@@ -12,13 +12,14 @@ int main() {
 	vec->push_back(2);
 	vec->push_back(3);
 	vec->erase(vec->begin() + 1);
-	cout << (*vec)[2];
+	cout << vec->at(0) << endl;
+	cout << vec->at(1) << endl;
 	auto item = vec->begin();
 	cout << (*item);
 	vec->insert(item, 2);
-	cout << (*vec)[0] << endl;
+
 	Tree2_3<int> *tree23 = new Tree2_3<int>();
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10; i++)
 		tree23->ins(i);
 	tree23->display();
 	return 0;

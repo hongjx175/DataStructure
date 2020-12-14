@@ -38,6 +38,8 @@ public:
 		capacity.resize(2 * m + 2);
 	}
 
+	Graph(Graph *graph1);
+
 	~Graph() {}
 
 	void add(int x, int y, double weight);
@@ -46,11 +48,19 @@ public:
 
 };
 
+Graph::Graph(Graph *graph1) {
+	numPoints = graph1->numPoints;
+	head = graph1->head;
+	nxt = graph1->nxt;
+	to = graph1->to;
+	capacity = graph1->capacity;
+	tot = graph1->tot;
+}
+
 void Graph::add(int x, int y, double weight) {
 	nxt[++tot] = head[x], head[x] = tot, to[tot] = y, capacity[tot] = weight;//添加边
 	std::swap(x, y);
 	nxt[++tot] = head[x], head[x] = tot, to[tot] = y, capacity[tot] = 0;
-
 }
 
 #endif //MAXFLOW_GRAPH_H

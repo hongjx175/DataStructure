@@ -79,7 +79,7 @@ int AlgoOnGraph::bfs(Graph *graph, int s, int t, pair<int, int> *pre, int *flow)
 int AlgoOnGraph::maxflow_EdmondsKarp(Graph *graph, int source, int sink) {
 	int maxflow = 0, augmentation;
 	int flow[graph->numPoints];
-	pair<int, int> pre[graph->numPoints];
+	pair<int, int> pre[graph->numPoints];//first记边，second记点
 
 	while ((augmentation = bfs(graph, source, sink, pre, flow)) != -1) {
 		maxflow += augmentation;

@@ -11,5 +11,8 @@ int main() {
 		tree23->ins(i);
 	tree23->display();
 	cout << endl << tree23->rank(8) << endl;
+	tree23->del(7);
+	tree23->display();
+	cout << endl << tree23->rank(8) << endl;
 	return 0;
 }

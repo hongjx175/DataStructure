@@ -12,6 +12,7 @@ using std::cout;
 using std::endl;
 using std::ostream;
 using std::vector;
+using std::swap;
 
 template<typename T>
 class Tree2_3 {
@@ -64,23 +65,25 @@ private:
 
 		int contains(T idata);
 
-		int size() { return data->size(); }
+		int size() { return data->size(); }//用于判断是2节点还是3节点
 	};
 
 	Node *root;
 
+	//void swap(Node *node1, Node *node2);
 	void split(Node *node);
 
 	void merge();
 
-	int _size(Node *fatherNode);
+	int _size(Node *fatherNode);//子树size
 
 	int _rank(T data, Node *start); //返回rank
 	void _display(Node *node);
 
+	void _del(Node *node);
+
 	Node *findInsertNode(T data, Node *node) {
-		if (node == nullptr)
-			return nullptr;
+		if (node == nullptr) return nullptr;
 		for (auto it = node->data->begin(); it != node->data->end(); ++it) {
 			if (*it == data) return nullptr; //此data已经在树中
 		}
@@ -95,6 +98,30 @@ private:
 					return findInsertNode(data, node->sonAt(1));
 			}
 		}
+	}
+
+	Node *findDeleteNode(T data, Node *node) {
+		if (node == nullptr) return nullptr;
+		for (auto it = node->data->begin(); it != node->data->end(); ++it) {
+			if (*it == data) return node; //此data在树中
+		}
+
+		if (data < node->dataAt(0)) {
+			return findDeleteNode(data, node->sonAt(0));
+		} else {
+			if (node->size() > 1 && data > node->dataAt(1))
+				return findDeleteNode(data, node->sonAt(2));
+			else
+				return findDeleteNode(data, node->sonAt(1));
+		}
+	}
+
+	Node *findNextNode(T data, Node *node) {
+		Node *nextNode = nullptr;
+		if (data == node->dataAt(0)) nextNode = node->sonAt(1);
+		if (data == node->dataAt(1)) nextNode = node->sonAt(2);
+		while (!nextNode->isLeaf()) nextNode = nextNode->sonAt(0);
+		return nextNode;
 	}
 
 public:
@@ -176,6 +203,7 @@ void Tree2_3<T>::_display(Node *node) {
 			cout << node->dataAt(1) << "  ";
 			_display(node->sonAt(2));
 		}
+
 	}
 }
 
@@ -237,6 +265,87 @@ void Tree2_3<T>::ins(T data) {
 }
 
 template<typename T>
-void Tree2_3<T>::del(T data) {}
+void Tree2_3<T>::_del(Node *node) {}
+
+template<typename T>
+void Tree2_3<T>::del(T data) {
+	Node *deleteNode = findDeleteNode(data, root);
+	if (deleteNode == nullptr) return;
+
+	//删除非叶子节点，转化成删除后继（必为叶子节点）
+	if (!deleteNode->isLeaf()) {
+		Node *nextNode = findNextNode(data, deleteNode);
+		for (auto it = deleteNode->data->begin(); it != deleteNode->data->end(); ++it) {
+			if (*it == data) {
+				*it = nextNode->dataAt(0);
+				*(nextNode->data->begin()) = data;
+				break;
+			}
+		}
+		deleteNode = nextNode;
+	}
+
+	auto deletePosition = deleteNode->data->begin();
+	while (*deletePosition != data) ++deletePosition;
+
+	if (deleteNode->size() > 1) {
+		//本身是3节点（叶节点，直接删除）
+		deleteNode->data->erase(deletePosition);
+	} else {
+		Node *father = deleteNode->father;
+
+		//本身是2节点，父亲是2节点
+		if (father->size() == 1) {
+			Node *brother = father->sonAt(0);
+			if (brother == deleteNode) brother = father->sonAt(1);
+
+			//本身是2节点，父亲是2节点且兄弟是3节点
+			if (brother->size() == 2) {
+				deleteNode->data->erase(deletePosition);
+				deleteNode->insertData(father->dataAt(0));
+				father->deleteData(0);
+				//本身是左儿子  /   右儿子
+				if (deleteNode == father->sonAt(0)) {
+					father->insertData(brother->dataAt(0));
+					brother->deleteData(0);
+				} else {
+					father->insertData(brother->dataAt(1));
+					brother->deleteData(1);
+				}
+			} //本身是2节点，父亲是2节点且兄弟是2节点
+			else {
+
+			}
+		} //本身是2节点，父亲是3节点
+		else {
+			//是否有3节点兄弟
+			bool has3brother =
+					(father->sonAt(0)->size() > 1) || (father->sonAt(1)->size() > 1) || (father->sonAt(2)->size() > 1);
+
+			//有 / 无 3节点兄弟
+			//本身是2节点，父亲是3节点，有3节点兄弟
+			if (has3brother) {
+				Node *brother2, *brother3;
+				if (deleteNode) {
+
+				}
+			} //无3节点兄弟
+			else {
+				//要删除的点为左儿子
+				if (deleteNode == father->sonAt(0)) {
+					father->deleteSon(0);
+					father->sonAt(0)->insertData(father->dataAt(0));
+					father->deleteData(0);
+				}//要删除的点为中、右儿子
+				else {
+					if (deleteNode == father->sonAt(1)) father->deleteSon(1);
+					else father->deleteSon(2);
+					father->sonAt(1)->insertData(father->dataAt(1));
+					father->deleteData(1);
+				}
+			}
+		}
+	}
+}
 
 #endif // INC_2_3_TREE_2_3TREE_H

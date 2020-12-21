@@ -32,6 +32,10 @@ private:
 		bool needSplit() { return data->size() > 2; }
 
 		void insertData(T idata) {
+			if (data->empty()) {
+				data->push_back(idata);
+				return;
+			}
 			auto it = data->begin();
 			for (; it != data->end() && (*it) < idata; ++it);
 			data->insert(it, idata);
@@ -77,16 +81,18 @@ private:
 	Node *findInsertNode(T data, Node *node) {
 		if (node == nullptr)
 			return nullptr;
-		for (auto it = (node->data)->begin(); it != (node->data)->end(); ++it) {
-			if (*it == data) return nullptr;
+		for (auto it = node->data->begin(); it != node->data->end(); ++it) {
+			if (*it == data) return nullptr; //此data已经在树中
 		}
 		if (node->isLeaf()) return node;
 		else {
 			if (data < node->dataAt(0)) {
 				return findInsertNode(data, node->sonAt(0));
 			} else {
-				if (node->size() > 1 && data > node->dataAt(1)) return findInsertNode(data, node->sonAt(2));
-				else return findInsertNode(data, node->sonAt(1));
+				if (node->size() > 1 && data > node->dataAt(1))
+					return findInsertNode(data, node->sonAt(2));
+				else
+					return findInsertNode(data, node->sonAt(1));
 			}
 		}
 	}
@@ -122,33 +128,35 @@ int Tree2_3<T>::_rank(T data, Node *start) {
 	if (start->isLeaf())
 		return start->contains(data);
 	//左中右儿子
-	if (data < *(start->data)[0]) {
-		return _rank(data, *(start->son)[0]);
-	} else if (data == *(start->data)[0]) {
-		return _size(*(start->son)[0]) + 1;
-	} else if (data > *(start->data)[0]) {
-		if (start->size() < 2 || data < *(start->data)[1])
-			return _size(*(start->son)[0]) + 1 + _rank(data, *(start->son)[1]);
-		else {
-			if (data == *(start->data)[1])
-				return _size(*(start->son)[0]) + _size(*(start->son)[1]) + 2;
-			else
-				return _size(*(start->son)[0]) + _size(*(start->son)[1]) + 2 +
-					   _rank(data, *(start->son)[2]);
+	if (data < start->dataAt(0)) {
+		return _rank(data, start->sonAt(0));
+	} else if (data == start->dataAt(0)) {
+		return _size(start->sonAt(0)) + 1;
+	} else if (data > start->dataAt(0)) {
+		if (start->size() < 2 || data < start->dataAt(1)) {
+			int rankInSon = _rank(data, start->sonAt(1));
+			return rankInSon == 0 ? 0 : _size(start->sonAt(0)) + 1 + rankInSon;
+		} else {
+			if (data == start->dataAt(1)) {
+				return _size(start->sonAt(0)) + _size(start->sonAt(1)) + 2;
+			} else {
+				int rankInSon = _rank(data, start->sonAt(2));
+				return rankInSon == 0 ? 0 : _size(start->sonAt(0)) + _size(start->sonAt(1)) + 2 + rankInSon;
+			}
 		}
 	}
 }
 
 template<typename T>
 bool Tree2_3<T>::search(T data) {
-	return rank(data) == 0;
+	return rank(data) != 0;
 }
 
 template<typename T>
 int Tree2_3<T>::_size(Node *fatherNode) {
 	if (fatherNode == nullptr)
 		return 0;
-	int cnt = (fatherNode->data)->size();
+	int cnt = fatherNode->data->size();
 	for (auto it = (fatherNode->son)->begin(); it != (fatherNode->son)->end(); ++it)
 		cnt += _size(*it);
 	return cnt;
@@ -176,34 +184,37 @@ void Tree2_3<T>::merge() {}
 
 template<typename T>
 void Tree2_3<T>::split(Node *node) {
-	if (node == nullptr) return;
+	//if (node == nullptr) return;
 	Node *father = node->father;
-	int midData = node->dataAt(1);
-	Node *node1 = new Node();
-
-	node1->insertData(node->dataAt(2));
+	Node *newNode = new Node();
+	T midData = node->dataAt(1);
+	newNode->insertData(node->dataAt(2));
 	node->deleteData(2);
 	node->deleteData(1);
+
 	if (!node->isLeaf()) {
-		node1->insertSon(node->sonAt(2));
-		node1->insertSon(node->sonAt(3));
+		//cout << "sizeSon:" << node->son->size() << endl;
+		newNode->insertSon(node->sonAt(2));
+		newNode->insertSon(node->sonAt(3));
 		node->deleteSon(3);
 		node->deleteSon(2);
 	}
 
 	if (father == nullptr) {
+		//cout << "root==node" << (root == node) << endl;
 		//根节点
 		root = new Node();
 		root->father = nullptr;
-		root->insertSon(node);
-		root->insertSon(node1);
+		root->insertSon(node), root->insertSon(newNode);
+		node->father = root, newNode->father = root;
 		root->insertData(midData);
 	} else {
 		father->insertData(midData);
 		auto it = father->son->begin();
 		while (*it != node) ++it;
 		++it;
-		father->son->insert(it, node1);
+		father->son->insert(it, newNode);
+		newNode->father = father;
 		if (father->needSplit())
 			split(father);
 	}

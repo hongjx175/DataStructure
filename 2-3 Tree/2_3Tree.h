@@ -43,24 +43,28 @@ private:
 		}
 
 		void deleteData(int id) {
-			data->erase(data->begin() + id);
+			if (!data->empty())
+				data->erase(data->begin() + id);
 		}
 
 		void insertSon(Node *ison) {
 			son->push_back(ison);
-			ison->father = this;
+			if (ison != nullptr)
+				ison->father = this;
 		}
 
 		void deleteSon(int id) {
-			son->erase(son->begin() + id);
+			if (!son->empty())
+				son->erase(son->begin() + id);
 		}
 
 		T dataAt(int id) {
+			if (data->empty()) return NULL;
 			return data->at(id);
 		}
 
 		Node *sonAt(int id) {
-			return son->at(id);
+			return son->size() > id ? son->at(id) : nullptr;
 		}
 
 		int contains(T idata);
@@ -70,10 +74,7 @@ private:
 
 	Node *root;
 
-	//void swap(Node *node1, Node *node2);
 	void split(Node *node);
-
-	void merge();
 
 	int _size(Node *fatherNode);//子树size
 
@@ -119,7 +120,7 @@ private:
 	Node *findNextNode(T data, Node *node) {
 		Node *nextNode = nullptr;
 		if (data == node->dataAt(0)) nextNode = node->sonAt(1);
-		if (data == node->dataAt(1)) nextNode = node->sonAt(2);
+		else if (data == node->dataAt(1)) nextNode = node->sonAt(2);
 		while (!nextNode->isLeaf()) nextNode = nextNode->sonAt(0);
 		return nextNode;
 	}
@@ -191,6 +192,7 @@ int Tree2_3<T>::_size(Node *fatherNode) {
 
 template<typename T>
 void Tree2_3<T>::_display(Node *node) {
+	if (node == nullptr) return;
 	if (node->isLeaf()) {
 		for (auto it = (node->data)->begin(); it != (node->data)->end(); ++it) {
 			cout << *it << "  ";
@@ -206,9 +208,6 @@ void Tree2_3<T>::_display(Node *node) {
 
 	}
 }
-
-template<typename T>
-void Tree2_3<T>::merge() {}
 
 template<typename T>
 void Tree2_3<T>::split(Node *node) {
@@ -265,7 +264,142 @@ void Tree2_3<T>::ins(T data) {
 }
 
 template<typename T>
-void Tree2_3<T>::_del(Node *node) {}
+void Tree2_3<T>::_del(Node *deleteNode) {
+	if (deleteNode == root) {
+		root = deleteNode->sonAt(0);
+		return;
+	}
+	deleteNode->deleteData(0);
+	Node *father = deleteNode->father;
+	Node *brother;
+	//本身是2节点，父亲是2节点
+	if (father->size() == 1) {
+
+		//本身是左节点，右节点是3节点
+		if (deleteNode == father->sonAt(0) && father->sonAt(1)->size() > 1) {
+			brother = father->sonAt(1);
+			deleteNode->data->clear();
+			deleteNode->insertData(father->dataAt(0));
+			father->deleteData(0);
+			father->insertData(brother->dataAt(0));
+			brother->deleteData(0);
+			deleteNode->insertSon(brother->sonAt(0));
+			brother->deleteSon(0);
+			return;
+		}
+		//本身是左节点，右节点是2节点
+		if (deleteNode == father->sonAt(0) && father->sonAt(1)->size() < 2) {
+			brother = father->sonAt(1);
+			brother->insertData(father->dataAt(0));
+			father->deleteData(0);
+			brother->son->insert(brother->son->begin(), deleteNode->sonAt(0));
+			deleteNode->deleteSon(0);
+			father->deleteSon(0);
+			_del(father);
+			return;
+		}
+
+		//本身是右节点，左节点是3节点
+		if (deleteNode == father->sonAt(1) && father->sonAt(0)->size() > 1) {
+			brother = father->sonAt(0);
+			deleteNode->data->clear();
+			deleteNode->insertData(father->dataAt(0));
+			father->deleteData(0);
+			father->insertData(brother->dataAt(1));
+			brother->deleteData(1);
+			deleteNode->son->insert(deleteNode->son->begin(), brother->sonAt(2));
+			brother->deleteSon(2);
+			return;
+		}
+
+		//本身是右节点，左节点是2节点
+		if (deleteNode == father->sonAt(1) && father->sonAt(0)->size() < 2) {
+			brother = father->sonAt(0);
+			brother->insertData(father->dataAt(0));
+			father->deleteData(0);
+			brother->insertSon(deleteNode->sonAt(0));
+			deleteNode->deleteSon(0);
+			father->deleteSon(1);
+			_del(father);
+			return;
+		}
+
+
+	} //本身是2节点，父亲是3节点
+	else {
+		//本身分别为左，中，右儿子，其相邻兄弟为2或3节点，共6种情形
+		//本身是左儿子，中儿子为2节点
+		if (deleteNode == father->sonAt(0) && father->sonAt(1)->size() < 2) {
+			brother = father->sonAt(1);
+			brother->insertData(father->dataAt(0));
+			father->deleteData(0);
+			brother->son->insert(brother->son->begin(), deleteNode->sonAt(0));
+			deleteNode->deleteSon(0);
+			father->deleteSon(0);
+			return;
+		}
+
+		//本身是左儿子，中儿子是3节点
+		if (deleteNode == father->sonAt(0) && father->sonAt(1)->size() > 1) {
+			brother = father->sonAt(1);
+			deleteNode->deleteData(0);
+			deleteNode->insertData(father->dataAt(0));
+			father->deleteData(0);
+			father->insertData(brother->dataAt(0));
+			brother->deleteData(0);
+			deleteNode->insertSon(brother->sonAt(0));
+			brother->deleteSon(0);
+			return;
+		}
+
+		//本身是中儿子，右儿子是2节点
+		if (deleteNode == father->sonAt(1) && father->sonAt(2)->size() < 2) {
+			brother = father->sonAt(2);
+			brother->insertData(father->dataAt(1));
+			father->deleteData(1);
+			brother->son->insert(brother->son->begin(), deleteNode->sonAt(0));
+			deleteNode->deleteSon(0);
+			father->deleteSon(1);
+			return;
+		}
+
+		//本身是中儿子，右儿子是3节点
+		if (deleteNode == father->sonAt(1) && father->sonAt(2)->size() > 1) {
+			brother = father->sonAt(2);
+			deleteNode->deleteData(0);
+			deleteNode->insertData(father->dataAt(1));
+			father->deleteData(1);
+			father->insertData(brother->dataAt(0));
+			brother->deleteData(0);
+			deleteNode->insertSon(brother->sonAt(0));
+			brother->deleteSon(0);
+			return;
+		}
+
+		//本身是右儿子，中儿子为2节点
+		if (deleteNode == father->sonAt(2) && father->sonAt(1)->size() < 2) {
+			brother = father->sonAt(1);
+			brother->insertData(father->dataAt(1));
+			father->deleteData(1);
+			brother->insertSon(deleteNode->sonAt(0));
+			deleteNode->deleteSon(0);
+			father->deleteSon(2);
+			return;
+		}
+		//本身是右儿子，中儿子是3节点
+		if (deleteNode == father->sonAt(2) && father->sonAt(1)->size() > 1) {
+			brother = father->sonAt(1);
+			deleteNode->deleteData(0);
+			deleteNode->insertData(father->dataAt(1));
+			father->deleteData(1);
+			father->insertData(brother->dataAt(1));
+			brother->deleteData(1);
+			deleteNode->son->insert(deleteNode->son->begin(), brother->sonAt(2));
+			brother->deleteSon(2);
+			return;
+		}
+	}
+}
 
 template<typename T>
 void Tree2_3<T>::del(T data) {
@@ -292,59 +426,8 @@ void Tree2_3<T>::del(T data) {
 		//本身是3节点（叶节点，直接删除）
 		deleteNode->data->erase(deletePosition);
 	} else {
-		Node *father = deleteNode->father;
-
-		//本身是2节点，父亲是2节点
-		if (father->size() == 1) {
-			Node *brother = father->sonAt(0);
-			if (brother == deleteNode) brother = father->sonAt(1);
-
-			//本身是2节点，父亲是2节点且兄弟是3节点
-			if (brother->size() == 2) {
-				deleteNode->data->erase(deletePosition);
-				deleteNode->insertData(father->dataAt(0));
-				father->deleteData(0);
-				//本身是左儿子  /   右儿子
-				if (deleteNode == father->sonAt(0)) {
-					father->insertData(brother->dataAt(0));
-					brother->deleteData(0);
-				} else {
-					father->insertData(brother->dataAt(1));
-					brother->deleteData(1);
-				}
-			} //本身是2节点，父亲是2节点且兄弟是2节点
-			else {
-
-			}
-		} //本身是2节点，父亲是3节点
-		else {
-			//是否有3节点兄弟
-			bool has3brother =
-					(father->sonAt(0)->size() > 1) || (father->sonAt(1)->size() > 1) || (father->sonAt(2)->size() > 1);
-
-			//有 / 无 3节点兄弟
-			//本身是2节点，父亲是3节点，有3节点兄弟
-			if (has3brother) {
-				Node *brother2, *brother3;
-				if (deleteNode) {
-
-				}
-			} //无3节点兄弟
-			else {
-				//要删除的点为左儿子
-				if (deleteNode == father->sonAt(0)) {
-					father->deleteSon(0);
-					father->sonAt(0)->insertData(father->dataAt(0));
-					father->deleteData(0);
-				}//要删除的点为中、右儿子
-				else {
-					if (deleteNode == father->sonAt(1)) father->deleteSon(1);
-					else father->deleteSon(2);
-					father->sonAt(1)->insertData(father->dataAt(1));
-					father->deleteData(1);
-				}
-			}
-		}
+		//本身是2节点，不能直接删除，需要维护23树
+		_del(deleteNode);
 	}
 }
 

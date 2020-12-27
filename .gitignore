@@ -13,3 +13,9 @@
 pkg/
 src/
 */cmake-build-debug/*
+*.cmake
+*.cmake
+*.cmake
+*.bin
+*.cxx
+*.cmake

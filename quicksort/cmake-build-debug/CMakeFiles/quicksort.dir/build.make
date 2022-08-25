@@ -79,15 +79,15 @@ include CMakeFiles/quicksort.dir/flags.make
 CMakeFiles/quicksort.dir/main.cpp.obj: CMakeFiles/quicksort.dir/flags.make
 CMakeFiles/quicksort.dir/main.cpp.obj: ../main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\86185\Desktop\DataStructure\quicksort\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/quicksort.dir/main.cpp.obj"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\quicksort.dir\main.cpp.obj -c C:\Users\86185\Desktop\DataStructure\quicksort\main.cpp
+	D:\Programming\MinGW-w64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\quicksort.dir\main.cpp.obj -c C:\Users\86185\Desktop\DataStructure\quicksort\main.cpp
 
 CMakeFiles/quicksort.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/quicksort.dir/main.cpp.i"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86185\Desktop\DataStructure\quicksort\main.cpp > CMakeFiles\quicksort.dir\main.cpp.i
+	D:\Programming\MinGW-w64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\86185\Desktop\DataStructure\quicksort\main.cpp > CMakeFiles\quicksort.dir\main.cpp.i
 
 CMakeFiles/quicksort.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/quicksort.dir/main.cpp.s"
-	D:\Programming\C++\Dev-Cpp\MinGW64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86185\Desktop\DataStructure\quicksort\main.cpp -o CMakeFiles\quicksort.dir\main.cpp.s
+	D:\Programming\MinGW-w64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\86185\Desktop\DataStructure\quicksort\main.cpp -o CMakeFiles\quicksort.dir\main.cpp.s
 
 # Object files for target quicksort
 quicksort_OBJECTS = \
